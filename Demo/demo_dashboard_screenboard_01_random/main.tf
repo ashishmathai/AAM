@@ -16,8 +16,8 @@ provider "datadog" {
   app_key = var.datadog_app_key
 }
 
-resource "datadog_dashboard" "Ashish-DEMO-Dashboard-01" {
-  title        = "ASHISH-DEMO-TITLE-01"
+resource "datadog_dashboard" "<dashboard_name>" {
+  title        = "<title_name>"
   description  = "Created using the Datadog provider in Terraform"
   layout_type  = "free"
   is_read_only = false
