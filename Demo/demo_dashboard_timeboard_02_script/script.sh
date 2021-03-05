@@ -2,8 +2,8 @@
 
 DATE=`date +"%Y%m%d-%H%M%S"`
 LAST_LINE=`tail -n 1 main`
-DIR="/media/ashish/Personal/Study/terraform/demo_dashboard_timeboard_02_script"
-WIDGET="/media/ashish/Personal/Study/terraform/demo_dashboard_timeboard_02_script/widgets"
+DIR="<path>/demo_dashboard_timeboard_02_script"
+WIDGET="<path>/demo_dashboard_timeboard_02_script/widgets"
 
 echo "Welcome! create your dashboard using code"
 read -p "Enter Dashboard Name: " DASHBOARD_NAME
@@ -19,28 +19,19 @@ else
 fi
 
 cp $DIR/terraform.t $DIR/terraform.tfvars
-#echo 'dashboard_name = "'$DASHBOARD_NAME'"' >> terraform.tfvar
-#echo 'title_dashboard = "'$title_dashboard'"' >> terraform.tfvar
 
 if [ -d "$DIR/backup" ]
 then
-	#echo "YES"
 	cp $DIR/main $DIR/backup/
 else
-	#echo "NO"
 	mkdir  $DIR/backup
 	cp $DIR/main  $DIR/backup
 fi
 
 
-
 if [ "$LAST_LINE" == "}" ]
 then
-	#echo "Last line is : || $LAST_LINE || "
-	#cat $DIR/main
 	sed '$d' $DIR/main >> $DIR/main.tf
-	#sed -i  s/var_dashboard_name/$DASHBOARD_NAME/g $DIR/main.tf > $DIR/main.tf
-	#cat $DIR/main.tf
 else
 	echo "continue selecting modules"
 	sed -i  's/var.dashboard_name/'$DASHBOARD_NAME'/g' >> $DIR/main.tf
@@ -147,19 +138,9 @@ do
 echo "exiting Case"
 done
 
-#if [[ $lastline == "}" ]]
-#then
-#	echo $lastline
-	#sed '$d' main > main
-
-#fi
-
-#cat $DIR/main.tf #>> $DIR/main.tf
-
-sudo chown -R ashish:ashish $DIR/*
+sudo chown -R <owner>:<group> $DIR/*
 sudo chmod +x *
-#cat module01 >> main 
-#cat $lastline >> main
 cd $DIR
+
 echo "Rewriting Terraform configuration files to a canonical format"
 terraform fmt
